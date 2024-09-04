@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using DG.Tweening;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
@@ -14,15 +15,20 @@ public class BattleSystem : MonoBehaviour
     public Transform playerBattleStation;
     public Transform enemyBattleStation;
 
+    private Animator playerAnimator;
+    private Animator enemyAnimator;
+
     Unit playerUnit;
     Unit enemyUnit;
 
-    public BattleState state;
+    public static BattleState state;
 
     void Start()
     {
         state = BattleState.START;
         StartCoroutine(SetupBattle());
+        playerAnimator = playerUnit.GetComponent<Animator>();
+        enemyAnimator = enemyUnit.GetComponent<Animator>();
     }
 
     IEnumerator SetupBattle()
@@ -43,44 +49,51 @@ public class BattleSystem : MonoBehaviour
             yield break;
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         state = BattleState.PLAYERTURN;
-        PlayerTurn();
     }
 
     IEnumerator PlayerAttack()
     {
-        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
-        yield return new WaitForSeconds(1f);
+        if(state == BattleState.PLAYERTURN)
+        {
+            StartCoroutine(playerUnit.Attack(enemyBattleStation,playerBattleStation,enemyAnimator));
+            bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+            yield return new WaitForSeconds(1f);
 
-        if (isDead)
-        {
-            state = BattleState.WON;
-            EndBattle();
-        }
-        else
-        {
-            state = BattleState.ENEMYTURN;
-            StartCoroutine(EnemyTurn());
+            if (isDead)
+            {
+                state = BattleState.WON;
+                EndBattle();
+            }
+            else
+            {
+                state = BattleState.ENEMYTURN;
+                StartCoroutine(EnemyTurn());
+            }
         }
     }
 
     IEnumerator EnemyTurn()
     {
-        bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
-        yield return new WaitForSeconds(1f);
+        if(state == BattleState.ENEMYTURN)
+        {
+            StartCoroutine(enemyUnit.Attack(playerBattleStation, enemyBattleStation, playerAnimator));
+            bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+            yield return new WaitForSeconds(1f);
 
-        if (isDead)
-        {
-            state = BattleState.LOST;
-            EndBattle();
+            if (isDead)
+            {
+                state = BattleState.LOST;
+                EndBattle();
+            }
+            else
+            {
+                state = BattleState.PLAYERTURN;
+            }
         }
-        else
-        {
-            state = BattleState.PLAYERTURN;
-            PlayerTurn();
-        }
+        
     }
 
     void EndBattle()
@@ -95,10 +108,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    void PlayerTurn()
-    {
-        // Oyuncunun saldýrý yapmasý için UI'yi güncelle
-    }
+    
 
     public void OnAttackButton()
     {
