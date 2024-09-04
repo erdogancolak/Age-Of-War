@@ -59,21 +59,17 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.PLAYERTURN)
         {
-            yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator));
-            bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+            yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator,enemyUnit));
             yield return new WaitForSeconds(0.3f);
-
-            if (isDead)
+            if(enemyUnit.currentHP <= 0)
             {
-               enemyAnimator.SetTrigger("Die");
-                state = BattleState.WON;
                 EndBattle();
             }
             else
             {
                 state = BattleState.ENEMYTURN;
-                yield return StartCoroutine(EnemyTurn());
             }
+            StartCoroutine(EnemyTurn());
         }
     }
 
@@ -81,16 +77,10 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.ENEMYTURN)
         {
-            yield return StartCoroutine(enemyUnit.Attack(playerBattleStation, enemyBattleStation, playerAnimator));
-            bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+            yield return StartCoroutine(enemyUnit.Attack(playerBattleStation, enemyBattleStation, playerAnimator,playerUnit));
             yield return new WaitForSeconds(0.3f);
-
-
-
-            if (isDead)
+            if (playerUnit.currentHP <= 0)
             {
-                playerAnimator.SetTrigger("Die");
-                state = BattleState.LOST;
                 EndBattle();
             }
             else
@@ -100,7 +90,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    void EndBattle()
+    public void EndBattle()
     {
         if (state == BattleState.WON)
         {

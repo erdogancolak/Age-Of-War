@@ -12,6 +12,8 @@ public class Unit : MonoBehaviour
 
     public int maxHP;
     public int currentHP;
+    public int characterIndex;
+    private Collider2D collider;
 
     Animator animator;
 
@@ -20,23 +22,15 @@ public class Unit : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        collider = GetComponent<Collider2D>();  
     }
 
-    public bool TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHP -= damage;
-
-        if (currentHP <= 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
-    public IEnumerator Attack(Transform enemyPos,Transform playerPos,Animator enemyAnimator)
+    public IEnumerator Attack(Transform enemyPos,Transform playerPos,Animator enemyAnimator,Unit enemyUnit)
     {
         if (isMove)
         {
@@ -49,17 +43,37 @@ public class Unit : MonoBehaviour
         
         animator.SetTrigger("Attack");
         enemyAnimator.SetTrigger("Hit");
-        yield return new WaitForSeconds(0.3f);
+        enemyUnit.TakeDamage(damage);
+        switch (characterIndex)
+        {
+            case 0:
+                if (enemyUnit.currentHP <= 0)
+                {
+                    enemyAnimator.SetTrigger("Die");
+                    enemyUnit.collider.offset = new Vector2(collider.offset.x, 0.19f);
+                    BattleSystem.state = BattleState.WON;
+                }
+                break;
+            case 1:
+                if (enemyUnit.currentHP <= 0)
+                {
+                    enemyAnimator.SetTrigger("Die");
+                    enemyUnit.collider.offset = new Vector2(collider.offset.x, 0.67f);
+                    BattleSystem.state = BattleState.LOST;
+                }
+                break;
+        }
+        yield return new WaitForSeconds(1f);
 
         if (isMove)
         {
+            transform.localScale = new Vector2(-1, 1);
             animator.SetBool("isRun", true);
             transform.DOMove(playerPos.position, 2);
             yield return new WaitForSeconds(2);
             animator.SetBool("isRun", false);
+            transform.localScale = new Vector2(1, 1);
             yield return new WaitForSeconds(1f);
-            BattleSystem.state = BattleState.ENEMYTURN;
         }
-        
     }
 }
