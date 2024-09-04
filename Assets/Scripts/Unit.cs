@@ -15,6 +15,8 @@ public class Unit : MonoBehaviour
 
     Animator animator;
 
+    public bool isMove;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -36,19 +38,28 @@ public class Unit : MonoBehaviour
 
     public IEnumerator Attack(Transform enemyPos,Transform playerPos,Animator enemyAnimator)
     {
-        animator.SetBool("isRun", true);
-        transform.DOMove(new Vector2(enemyPos.position.x - 1.6f,enemyPos.position.y), 2);
-        yield return new WaitForSeconds(2);
-        animator.SetBool("isRun", false);
-        yield return new WaitForSeconds(.5f);
+        if (isMove)
+        {
+            animator.SetBool("isRun", true);
+            transform.DOMove(new Vector2(enemyPos.position.x - 1.6f, enemyPos.position.y), 2);
+            yield return new WaitForSeconds(2);
+            animator.SetBool("isRun", false);
+            yield return new WaitForSeconds(.5f);
+        }
+        
         animator.SetTrigger("Attack");
         enemyAnimator.SetTrigger("Hit");
-        yield return new WaitForSeconds(1f);
-        animator.SetBool("isRun", true);
-        transform.DOMove(playerPos.position, 2);
-        yield return new WaitForSeconds(2);
-        animator.SetBool("isRun", false);
-        yield return new WaitForSeconds(1f);
-        BattleSystem.state = BattleState.ENEMYTURN;
+        yield return new WaitForSeconds(0.3f);
+
+        if (isMove)
+        {
+            animator.SetBool("isRun", true);
+            transform.DOMove(playerPos.position, 2);
+            yield return new WaitForSeconds(2);
+            animator.SetBool("isRun", false);
+            yield return new WaitForSeconds(1f);
+            BattleSystem.state = BattleState.ENEMYTURN;
+        }
+        
     }
 }

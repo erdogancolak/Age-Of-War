@@ -186,9 +186,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Striker
   unitLevel: 99
-  damage: 10
+  damage: 30
   maxHP: 25
   currentHP: 20
+  isMove: 1
 --- !u!1 &5065696294885511937
 GameObject:
   m_ObjectHideFlags: 0

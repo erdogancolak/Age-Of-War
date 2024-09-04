@@ -186,9 +186,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: BotWheel
   unitLevel: 1
-  damage: 5
+  damage: 30
   maxHP: 30
   currentHP: 30
+  isMove: 0
 --- !u!1 &8926912075917257667
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,8 +27,6 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.START;
         StartCoroutine(SetupBattle());
-        playerAnimator = playerUnit.GetComponent<Animator>();
-        enemyAnimator = enemyUnit.GetComponent<Animator>();
     }
 
     IEnumerator SetupBattle()
@@ -49,6 +47,9 @@ public class BattleSystem : MonoBehaviour
             yield break;
         }
 
+        playerAnimator = playerUnit.GetComponent<Animator>();
+        enemyAnimator = enemyUnit.GetComponent<Animator>();
+
         yield return new WaitForSeconds(1f);
 
         state = BattleState.PLAYERTURN;
@@ -56,35 +57,39 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        if(state == BattleState.PLAYERTURN)
+        if (state == BattleState.PLAYERTURN)
         {
-            StartCoroutine(playerUnit.Attack(enemyBattleStation,playerBattleStation,enemyAnimator));
+            yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator));
             bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.3f);
 
             if (isDead)
             {
+               enemyAnimator.SetTrigger("Die");
                 state = BattleState.WON;
                 EndBattle();
             }
             else
             {
                 state = BattleState.ENEMYTURN;
-                StartCoroutine(EnemyTurn());
+                yield return StartCoroutine(EnemyTurn());
             }
         }
     }
 
     IEnumerator EnemyTurn()
     {
-        if(state == BattleState.ENEMYTURN)
+        if (state == BattleState.ENEMYTURN)
         {
-            StartCoroutine(enemyUnit.Attack(playerBattleStation, enemyBattleStation, playerAnimator));
+            yield return StartCoroutine(enemyUnit.Attack(playerBattleStation, enemyBattleStation, playerAnimator));
             bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.3f);
+
+
 
             if (isDead)
             {
+                playerAnimator.SetTrigger("Die");
                 state = BattleState.LOST;
                 EndBattle();
             }
@@ -93,7 +98,6 @@ public class BattleSystem : MonoBehaviour
                 state = BattleState.PLAYERTURN;
             }
         }
-        
     }
 
     void EndBattle()
@@ -107,8 +111,6 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("You were defeated.");
         }
     }
-
-    
 
     public void OnAttackButton()
     {
