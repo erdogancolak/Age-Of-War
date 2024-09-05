@@ -1,7 +1,9 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class Unit : MonoBehaviour
 
     public int maxHP;
     public int currentHP;
+    public Slider healthBar;
+
     public int characterIndex;
     private Collider2D collider;
 
@@ -19,18 +23,42 @@ public class Unit : MonoBehaviour
 
     public bool isMove;
 
+    void Start()
+    {
+        if (healthBar == null)
+        {
+            Debug.LogError("Health Bar is not assigned!");
+        }
+    }
+
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        collider = GetComponent<Collider2D>();  
+        collider = GetComponent<Collider2D>();
     }
 
     public void TakeDamage(int damage)
     {
         currentHP -= damage;
+        if (currentHP < 0)
+        {
+            currentHP = 0;
+        }
+        Debug.Log("Current HP: " + currentHP);
+        UpdateHealthBar();
     }
 
-    public IEnumerator Attack(Transform enemyPos,Transform playerPos,Animator enemyAnimator,Unit enemyUnit)
+    private void UpdateHealthBar()
+    {
+        if (healthBar != null)
+        {
+            float ratio = (float)currentHP / maxHP;
+            healthBar.value = ratio;
+        }
+    }
+
+    public IEnumerator Attack(Transform enemyPos, Transform playerPos, Animator enemyAnimator, Unit enemyUnit)
     {
         if (isMove)
         {
@@ -40,7 +68,7 @@ public class Unit : MonoBehaviour
             animator.SetBool("isRun", false);
             yield return new WaitForSeconds(.5f);
         }
-        
+
         animator.SetTrigger("Attack");
         enemyAnimator.SetTrigger("Hit");
         enemyUnit.TakeDamage(damage);

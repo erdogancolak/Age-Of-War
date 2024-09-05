@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7151027144901550558}
   - component: {fileID: 3400955011501040058}
   - component: {fileID: -1636758992669630857}
-  - component: {fileID: 614189407712718342}
   m_Layer: 0
   m_Name: Striker
   m_TagString: Untagged
@@ -190,23 +189,9 @@ MonoBehaviour:
   damage: 10
   maxHP: 30
   currentHP: 30
+  healthBar: {fileID: 3809344855884290828, guid: b7bc0d6441f96d243aa64b053d460161, type: 3}
   characterIndex: 0
   isMove: 1
---- !u!114 &614189407712718342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 120359415764056503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5bc5b51bdc72084a8c2cc8d1e990ff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 30
-  currentHP: 30
-  healthBar: {fileID: 0}
 --- !u!1 &5065696294885511937
 GameObject:
   m_ObjectHideFlags: 0

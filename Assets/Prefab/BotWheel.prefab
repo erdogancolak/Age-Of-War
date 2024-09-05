@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2379563931801027208}
   - component: {fileID: 6800576324187398193}
   - component: {fileID: 5319555707071156555}
-  - component: {fileID: -2587945500047278066}
   m_Layer: 0
   m_Name: BotWheel
   m_TagString: Untagged
@@ -190,23 +189,9 @@ MonoBehaviour:
   damage: 5
   maxHP: 25
   currentHP: 25
+  healthBar: {fileID: 2296675863049374808, guid: f33dc69b460005f4b861427297e7fe1a, type: 3}
   characterIndex: 1
   isMove: 0
---- !u!114 &-2587945500047278066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1286606048941180657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5bc5b51bdc72084a8c2cc8d1e990ff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 25
-  currentHP: 25
-  healthBar: {fileID: 0}
 --- !u!1 &8926912075917257667
 GameObject:
   m_ObjectHideFlags: 0
