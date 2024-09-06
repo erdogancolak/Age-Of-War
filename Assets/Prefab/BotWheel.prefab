@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5319555707071156555}
   m_Layer: 0
   m_Name: BotWheel
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -186,10 +186,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: BotWheel
   unitLevel: 1
-  damage: 5
-  maxHP: 25
-  currentHP: 25
-  healthBar: {fileID: 2296675863049374808, guid: f33dc69b460005f4b861427297e7fe1a, type: 3}
+  damage: 20
+  maxHP: 100
+  currentHP: 100
   characterIndex: 1
   isMove: 0
 --- !u!1 &8926912075917257667

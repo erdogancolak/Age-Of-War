@@ -13,8 +13,7 @@ public class Unit : MonoBehaviour
     public int damage;
 
     public int maxHP;
-    public int currentHP;
-    public Slider healthBar;
+    public float currentHP;
 
     public int characterIndex;
     private Collider2D collider;
@@ -25,10 +24,7 @@ public class Unit : MonoBehaviour
 
     void Start()
     {
-        if (healthBar == null)
-        {
-            Debug.LogError("Health Bar is not assigned!");
-        }
+        
     }
 
 
@@ -45,18 +41,9 @@ public class Unit : MonoBehaviour
         {
             currentHP = 0;
         }
-        Debug.Log("Current HP: " + currentHP);
-        UpdateHealthBar();
     }
 
-    private void UpdateHealthBar()
-    {
-        if (healthBar != null)
-        {
-            float ratio = (float)currentHP / maxHP;
-            healthBar.value = ratio;
-        }
-    }
+    
 
     public IEnumerator Attack(Transform enemyPos, Transform playerPos, Animator enemyAnimator, Unit enemyUnit)
     {
@@ -71,6 +58,7 @@ public class Unit : MonoBehaviour
 
         animator.SetTrigger("Attack");
         enemyAnimator.SetTrigger("Hit");
+        yield return new WaitForSeconds(.5f);
         enemyUnit.TakeDamage(damage);
         switch (characterIndex)
         {

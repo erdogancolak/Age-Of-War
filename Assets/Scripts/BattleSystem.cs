@@ -23,7 +23,7 @@ public class BattleSystem : MonoBehaviour
 
     public static BattleState state;
 
-    void Start()
+    void Awake()
     {
         state = BattleState.START;
         StartCoroutine(SetupBattle());

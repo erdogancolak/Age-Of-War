@@ -5,16 +5,25 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider;
+    public Image playerHealthBar, enemyHealthBar;
+    private GameObject player, enemy;
+    private Unit playerUnit, enemyUnit;
 
-    public void SetMaxHealth(int health)
+    private void Start()
     {
-        slider.maxValue = health;
-        slider.value = health;
+        player = GameObject.FindGameObjectWithTag("Player");
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
+        playerUnit = player.transform.GetChild(0).GetComponent<Unit>();
+        enemyUnit = enemy.transform.GetChild (0).GetComponent<Unit>();  
     }
 
-    public void SetHealth(int health)
-    {        
-        slider.value = health;
+    private void Update()
+    {
+        HealthBarController();
+    }
+    void HealthBarController()
+    {
+        playerHealthBar.fillAmount = playerUnit.currentHP / 100;
+        enemyHealthBar.fillAmount = enemyUnit.currentHP / 100;
     }
 }
