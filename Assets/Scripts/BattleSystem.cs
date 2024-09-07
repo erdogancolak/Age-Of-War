@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
@@ -95,6 +96,7 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             Debug.Log("You won the battle!");
+            SceneManager.LoadScene(2);
         }
         else if (state == BattleState.LOST)
         {

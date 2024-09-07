@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ErdoganScene.unity
     guid: f57d17235305c7c46be7187be648ba13
+  - enabled: 1
+    path: Assets/Scenes/Patron Scene.unity
+    guid: ffbb8f032dbbb4748821b0fc742987cc
   m_configObjects: {}
