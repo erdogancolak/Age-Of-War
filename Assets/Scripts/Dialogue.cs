@@ -10,6 +10,7 @@ public class Dialogue : MonoBehaviour
     public string[] lines;
     public float typingSpeed;
     public GameObject portal; // Portal objesi referansý
+    public GameObject enemyPrefabObject;
     public Transform player; // Karakterin referansý
     public Transform portalPosition; // Portalýn pozisyonu
     public float moveSpeed = 2f; // Karakterin hareket hýzý
@@ -79,6 +80,7 @@ public class Dialogue : MonoBehaviour
         animator.SetBool("isRun", true); // Karakterin koþma animasyonunu baþlat
         player.DOMove(portalPosition.position, moveSpeed); // Karakteri portala doðru hareket ettir
         yield return new WaitForSeconds(moveSpeed); // Hareket süresi kadar bekle
+        BattleSystem.enemyPrefab = enemyPrefabObject;
         SceneManager.LoadScene(1); // Bir sonraki sahneye geç
     }
 }

@@ -191,6 +191,7 @@ MonoBehaviour:
   currentHP: 100
   characterIndex: 1
   isMove: 0
+  isEnemy: 1
 --- !u!1 &8926912075917257667
 GameObject:
   m_ObjectHideFlags: 0

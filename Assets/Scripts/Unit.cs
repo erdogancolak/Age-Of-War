@@ -21,6 +21,7 @@ public class Unit : MonoBehaviour
     Animator animator;
 
     public bool isMove;
+    public bool isEnemy;
 
     void Start()
     {
@@ -50,7 +51,7 @@ public class Unit : MonoBehaviour
         if (isMove)
         {
             animator.SetBool("isRun", true);
-            transform.DOMove(new Vector2(enemyPos.position.x - 1.6f, enemyPos.position.y), 2);
+            transform.DOMove(new Vector2(enemyPos.position.x , enemyPos.position.y), 2);
             yield return new WaitForSeconds(2);
             animator.SetBool("isRun", false);
             yield return new WaitForSeconds(.5f);
@@ -85,7 +86,14 @@ public class Unit : MonoBehaviour
         {
             transform.localScale = new Vector2(-1, 1);
             animator.SetBool("isRun", true);
-            transform.DOMove(playerPos.position, 2);
+            if(isEnemy)
+            {
+                transform.DOMove(new Vector2(playerPos.position.x + 1.6f, playerPos.position.y), 2);
+            }
+            else
+            {
+                transform.DOMove(new Vector2(playerPos.position.x - 1.6f, playerPos.position.y), 2);
+            }
             yield return new WaitForSeconds(2);
             animator.SetBool("isRun", false);
             transform.localScale = new Vector2(1, 1);

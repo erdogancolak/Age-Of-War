@@ -1150,6 +1150,7 @@ MonoBehaviour:
     Bol \u015Fans !!"
   typingSpeed: 0.1
   portal: {fileID: 639128405}
+  enemyPrefabObject: {fileID: 1286606048941180657, guid: 1063fffd48c2c8441ac5667c7f0dbd63, type: 3}
   player: {fileID: 1905560570}
   portalPosition: {fileID: 639128408}
   moveSpeed: 2

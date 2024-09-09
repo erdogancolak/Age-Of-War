@@ -11,7 +11,7 @@ public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 public class BattleSystem : MonoBehaviour
 {
     public GameObject playerPrefab;
-    public GameObject enemyPrefab;
+    public static GameObject enemyPrefab;
 
     public Transform playerBattleStation;
     public Transform enemyBattleStation;
@@ -33,6 +33,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator SetupBattle()
     {
         GameObject playerGo = Instantiate(playerPrefab, playerBattleStation);
+        playerGo.transform.position = new Vector2(playerBattleStation.position.x - 1.6f, playerBattleStation.position.y);
         playerUnit = playerGo.GetComponent<Unit>();
         if (playerUnit == null)
         {
@@ -41,7 +42,9 @@ public class BattleSystem : MonoBehaviour
         }
 
         GameObject enemyGo = Instantiate(enemyPrefab, enemyBattleStation);
+        enemyGo.transform.position = new Vector2(enemyBattleStation.position.x + 1.6f, enemyBattleStation.position.y);
         enemyUnit = enemyGo.GetComponent<Unit>();
+        enemyUnit.isEnemy = true;
         if (enemyUnit == null)
         {
             Debug.LogError("Enemy Unit component is missing on enemyPrefab.");
