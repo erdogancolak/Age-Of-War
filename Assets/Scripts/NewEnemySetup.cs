@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NewEnemySetup : MonoBehaviour
 {
     public List<GameObject> enemiesPrefab;
     private static int enemyIndex;
+    public Dropdown skillDropdown;
+    public string choosedSkill;
     void Start()
     {
         
@@ -35,5 +38,10 @@ public class NewEnemySetup : MonoBehaviour
                 break;
         }
         SceneManager.LoadScene(1);
+    }
+
+    public void SkillButton()
+    {
+        
     }
 }

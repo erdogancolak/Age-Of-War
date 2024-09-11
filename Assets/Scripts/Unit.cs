@@ -84,7 +84,15 @@ public class Unit : MonoBehaviour
 
         if (isMove)
         {
-            transform.localScale = new Vector2(-1, 1);
+            
+            if(isEnemy)
+            {
+                transform.localScale = new Vector2(1, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector2(-1, 1);
+            }
             animator.SetBool("isRun", true);
             if(isEnemy)
             {
@@ -96,7 +104,14 @@ public class Unit : MonoBehaviour
             }
             yield return new WaitForSeconds(2);
             animator.SetBool("isRun", false);
-            transform.localScale = new Vector2(1, 1);
+            if(isEnemy)
+            {
+                transform.localScale = new Vector2(-1, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector2(1, 1);
+            }
             yield return new WaitForSeconds(1f);
         }
     }

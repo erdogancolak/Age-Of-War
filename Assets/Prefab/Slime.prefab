@@ -120,8 +120,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.13731419, y: 0.08879873}
-  m_Size: {x: 1.983843, y: 1.982678}
+  m_Offset: {x: 0.035758413, y: -0.28617203}
+  m_Size: {x: 0.9682839, y: 0.968266}
   m_Direction: 0
 --- !u!50 &3600969159919078982
 Rigidbody2D:
@@ -149,7 +149,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &3060744079918023994
 Animator:
   serializedVersion: 5
@@ -183,11 +183,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f0e360222d7f134bbf8d2d3ac4f7ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: 
-  unitLevel: 0
-  damage: 0
-  maxHP: 0
-  currentHP: 0
-  characterIndex: 0
-  isMove: 0
-  isEnemy: 0
+  unitName: Slime
+  unitLevel: 20
+  damage: 25
+  maxHP: 100
+  currentHP: 100
+  characterIndex: 1
+  isMove: 1
+  isEnemy: 1
