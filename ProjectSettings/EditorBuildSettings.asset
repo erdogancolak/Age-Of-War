@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/KazimScene.unity
+    guid: 450c9336877ba794baafe0bece269ac7
+  - enabled: 1
     path: Assets/Scenes/IntroScene.unity
     guid: 36648fd8f80fc7d479def0c8bdb8ebe7
   - enabled: 1
