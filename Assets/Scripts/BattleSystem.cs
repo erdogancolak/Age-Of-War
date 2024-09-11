@@ -20,8 +20,12 @@ public class BattleSystem : MonoBehaviour
     private Animator playerAnimator;
     private Animator enemyAnimator;
 
-    public Text skillButton;
+    public Text skillButtonText;
+    public GameObject skillButton;
 
+    
+
+    public static int winIndex;
     Unit playerUnit;
     Unit enemyUnit;
 
@@ -32,9 +36,24 @@ public class BattleSystem : MonoBehaviour
         switch (NewEnemySetup.choosedSkill)
         {
             case 1:
-                skillButton.text = "BotWheel";
+                skillButtonText.text = "BotWheel";
+                skillButton.SetActive(true);
+                break;
+            case 2:
+                skillButtonText.text = "NightBorne";
+                skillButton.SetActive(true);
+                break;
+            case 3:
+                skillButtonText.text = "Wizard";
+                skillButton.SetActive(true);
+                break;
+            case 4:
+                skillButtonText.text = "Slime";
+                skillButton.SetActive(true);
                 break;
             default:
+                skillButtonText.text = "LOCKED";
+                skillButton.SetActive(false);
                 break;
         }
     }
@@ -113,8 +132,9 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.WON)
         {
+            winIndex++;
             Debug.Log("You won the battle!");
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(3);
         }
         else if (state == BattleState.LOST)
         {
@@ -126,19 +146,49 @@ public class BattleSystem : MonoBehaviour
     {
         if (state != BattleState.PLAYERTURN)
             return;
-
+        playerUnit.isMove = true;
         StartCoroutine(PlayerAttack());
     }
 
     public void OnSkillButton()
     {
+        StartCoroutine(skillChoose());
+    }
+
+    public IEnumerator skillChoose()
+    {
         switch (NewEnemySetup.choosedSkill)
         {
             case 1:
+                playerUnit.isMove = false;
                 StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "BotWheel"));
+                yield return new WaitForSeconds(1);
+                break;
+            case 2:
+                StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "NightBorne"));
+                yield return new WaitForSeconds(1);
+                break;
+            case 3:
+                playerUnit.isMove = false;
+                StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Wizard"));
+                yield return new WaitForSeconds(1);
+                break;
+            case 4:
+                StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Slime"));
+                yield return new WaitForSeconds(1);
                 break;
             default:
                 break;
         }
+        yield return new WaitForSeconds(1f);
+        if (enemyUnit.currentHP <= 0)
+        {
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.ENEMYTURN;
+        }
+        StartCoroutine(EnemyTurn());
     }
 }

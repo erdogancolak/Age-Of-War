@@ -81,6 +81,6 @@ public class Dialogue : MonoBehaviour
         player.DOMove(portalPosition.position, moveSpeed); // Karakteri portala doðru hareket ettir
         yield return new WaitForSeconds(moveSpeed); // Hareket süresi kadar bekle
         BattleSystem.enemyPrefab = enemyPrefabObject;
-        SceneManager.LoadScene(1); // Bir sonraki sahneye geç
+        SceneManager.LoadScene(2); // Bir sonraki sahneye geç
     }
 }

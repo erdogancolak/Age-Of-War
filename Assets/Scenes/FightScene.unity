@@ -559,7 +559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -320, y: -459}
+  m_AnchoredPosition: {x: -208, y: -459}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &678951944
@@ -705,7 +705,8 @@ MonoBehaviour:
   playerPrefab: {fileID: 120359415764056503, guid: 29f1c43dd45900e42b35802cd3b64204, type: 3}
   playerBattleStation: {fileID: 1616498596}
   enemyBattleStation: {fileID: 646897254}
-  skillButton: {fileID: 1803928822}
+  skillButtonText: {fileID: 1803928822}
+  skillButton: {fileID: 678951942}
 --- !u!4 &725337240
 Transform:
   m_ObjectHideFlags: 0

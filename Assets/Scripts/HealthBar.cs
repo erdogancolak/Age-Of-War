@@ -23,7 +23,7 @@ public class HealthBar : MonoBehaviour
     }
     void HealthBarController()
     {
-        playerHealthBar.fillAmount = playerUnit.currentHP / playerUnit.currentHP;
-        enemyHealthBar.fillAmount = enemyUnit.currentHP / enemyUnit.currentHP;
+        playerHealthBar.fillAmount = playerUnit.currentHP / 100;
+        enemyHealthBar.fillAmount = enemyUnit.currentHP / 100;
     }
 }

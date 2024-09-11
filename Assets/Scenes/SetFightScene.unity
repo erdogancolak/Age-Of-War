@@ -340,6 +340,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1193124879}
+          m_TargetAssemblyTypeName: NewEnemySetup, Assembly-CSharp
+          m_MethodName: SkillButton
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &264593693
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,10 +729,6 @@ MonoBehaviour:
     m_Options:
     - m_Text: Choose Skill
       m_Image: {fileID: 0}
-    - m_Text: BotWheel
-      m_Image: {fileID: -483940882, guid: 65ea2d0fc25e39d4289e319bd42ff0a2, type: 3}
-    - m_Text: Nightborne
-      m_Image: {fileID: -1224276966, guid: e3c0aef67706a2e4d96e48a90a1b0bc1, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1076,11 +1084,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesPrefab:
-  - {fileID: 7233665583641068274, guid: 2bd41a9876df4464b926894ef98c8c0b, type: 3}
   - {fileID: 5633379910191778515, guid: ed31eef45c4c5834696894aa33b24199, type: 3}
+  - {fileID: 7233665583641068274, guid: 2bd41a9876df4464b926894ef98c8c0b, type: 3}
   - {fileID: 2111590146235137586, guid: 7b609663f7aebe0468f2e2f3658a198a, type: 3}
   - {fileID: 8522207764911333476, guid: ef2686ba4e3f4884c8b3d0d3dd90c03a, type: 3}
-  skillDropdown: {fileID: 0}
+  skillDropdown: {fileID: 664146001}
+  Skills:
+  - BotWheel
+  - NightBorne
+  - Wizard
+  - Slime
 --- !u!4 &1193124880
 Transform:
   m_ObjectHideFlags: 0

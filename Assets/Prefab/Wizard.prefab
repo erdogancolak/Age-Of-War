@@ -187,7 +187,7 @@ MonoBehaviour:
   unitLevel: 20
   damage: 25
   maxHP: 100
-  currentHP: 50
+  currentHP: 100
   characterIndex: 1
   isMove: 0
   isEnemy: 1
