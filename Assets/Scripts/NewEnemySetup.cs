@@ -9,7 +9,7 @@ public class NewEnemySetup : MonoBehaviour
     public List<GameObject> enemiesPrefab;
     private static int enemyIndex;
     public Dropdown skillDropdown;
-    public string choosedSkill;
+    public static int choosedSkill;
     void Start()
     {
         
@@ -42,6 +42,6 @@ public class NewEnemySetup : MonoBehaviour
 
     public void SkillButton()
     {
-        
+        choosedSkill = skillDropdown.value;        
     }
 }

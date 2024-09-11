@@ -581,7 +581,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 725337239}
           m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
-          m_MethodName: OnAttackButton
+          m_MethodName: OnSkillButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -705,6 +705,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 120359415764056503, guid: 29f1c43dd45900e42b35802cd3b64204, type: 3}
   playerBattleStation: {fileID: 1616498596}
   enemyBattleStation: {fileID: 646897254}
+  skillButton: {fileID: 1803928822}
 --- !u!4 &725337240
 Transform:
   m_ObjectHideFlags: 0

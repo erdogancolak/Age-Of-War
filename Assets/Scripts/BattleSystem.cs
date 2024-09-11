@@ -5,6 +5,7 @@ using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
@@ -19,10 +20,24 @@ public class BattleSystem : MonoBehaviour
     private Animator playerAnimator;
     private Animator enemyAnimator;
 
+    public Text skillButton;
+
     Unit playerUnit;
     Unit enemyUnit;
 
     public static BattleState state;
+
+    private void Start()
+    {
+        switch (NewEnemySetup.choosedSkill)
+        {
+            case 1:
+                skillButton.text = "BotWheel";
+                break;
+            default:
+                break;
+        }
+    }
 
     void Awake()
     {
@@ -63,7 +78,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.PLAYERTURN)
         {
-            yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator,enemyUnit));
+            yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator,enemyUnit, "Attack"));
             yield return new WaitForSeconds(0.3f);
             if(enemyUnit.currentHP <= 0)
             {
@@ -81,7 +96,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.ENEMYTURN)
         {
-            yield return StartCoroutine(enemyUnit.Attack(playerBattleStation, enemyBattleStation, playerAnimator,playerUnit));
+            yield return StartCoroutine(enemyUnit.Attack(playerBattleStation, enemyBattleStation, playerAnimator,playerUnit,"Attack"));
             yield return new WaitForSeconds(0.3f);
             if (playerUnit.currentHP <= 0)
             {
@@ -113,5 +128,17 @@ public class BattleSystem : MonoBehaviour
             return;
 
         StartCoroutine(PlayerAttack());
+    }
+
+    public void OnSkillButton()
+    {
+        switch (NewEnemySetup.choosedSkill)
+        {
+            case 1:
+                StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "BotWheel"));
+                break;
+            default:
+                break;
+        }
     }
 }

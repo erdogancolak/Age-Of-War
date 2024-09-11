@@ -719,6 +719,8 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: BotWheel
       m_Image: {fileID: -483940882, guid: 65ea2d0fc25e39d4289e319bd42ff0a2, type: 3}
+    - m_Text: Nightborne
+      m_Image: {fileID: -1224276966, guid: e3c0aef67706a2e4d96e48a90a1b0bc1, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1079,7 +1081,6 @@ MonoBehaviour:
   - {fileID: 2111590146235137586, guid: 7b609663f7aebe0468f2e2f3658a198a, type: 3}
   - {fileID: 8522207764911333476, guid: ef2686ba4e3f4884c8b3d0d3dd90c03a, type: 3}
   skillDropdown: {fileID: 0}
-  choosedSkill: 
 --- !u!4 &1193124880
 Transform:
   m_ObjectHideFlags: 0

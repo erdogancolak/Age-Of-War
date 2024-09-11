@@ -46,7 +46,7 @@ public class Unit : MonoBehaviour
 
     
 
-    public IEnumerator Attack(Transform enemyPos, Transform playerPos, Animator enemyAnimator, Unit enemyUnit)
+    public IEnumerator Attack(Transform enemyPos, Transform playerPos, Animator enemyAnimator, Unit enemyUnit, string animTrigger)
     {
         if (isMove)
         {
@@ -57,7 +57,7 @@ public class Unit : MonoBehaviour
             yield return new WaitForSeconds(.5f);
         }
 
-        animator.SetTrigger("Attack");
+        animator.SetTrigger(animTrigger);
         enemyAnimator.SetTrigger("Hit");
         yield return new WaitForSeconds(.5f);
         enemyUnit.TakeDamage(damage);
