@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4577459052861489109}
   - component: {fileID: 7946812741750191535}
   - component: {fileID: 2606948746324817813}
-  - component: {fileID: 4374971482009776982}
   - component: {fileID: 6250085474769743170}
+  - component: {fileID: 5048555250493300196}
   m_Layer: 0
   m_Name: Demon
   m_TagString: Enemy
@@ -136,8 +136,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &4374971482009776982
-CapsuleCollider2D:
+--- !u!114 &6250085474769743170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8522207764911333476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f0e360222d7f134bbf8d2d3ac4f7ff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: Demon
+  unitLevel: 20
+  damage: 25
+  maxHP: 100
+  currentHP: 100
+  characterIndex: 1
+  isMove: 1
+  isEnemy: 1
+--- !u!61 &5048555250493300196
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -168,26 +188,16 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.009099245, y: -0.74033016}
-  m_Size: {x: 1.1815724, y: 1.6806058}
-  m_Direction: 0
---- !u!114 &6250085474769743170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8522207764911333476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f0e360222d7f134bbf8d2d3ac4f7ff4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitName: Demon
-  unitLevel: 20
-  damage: 25
-  maxHP: 100
-  currentHP: 100
-  characterIndex: 1
-  isMove: 1
-  isEnemy: 1
+  m_Offset: {x: -0.13963675, y: 0.40550482}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.52, y: 0.23}
+    oldSize: {x: 9, y: 5}
+    newSize: {x: 9, y: 5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.4924741, y: 3.304752}
+  m_EdgeRadius: 0

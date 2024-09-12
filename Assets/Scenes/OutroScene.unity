@@ -1142,7 +1142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDisplay: {fileID: 1805551823}
   lines:
-  - "Strike : Ne oluyor b\xF6yle d\xFC\u015Fmanlar\u0131m\u0131z bana sald\u0131r\u0131yor
+  - "Strike : Ne oluyor b\xF6yle adamlar\u0131m\u0131z bana sald\u0131r\u0131yor
     !"
   - "Patron :  Ah eski d\xFC\u015Fman\u0131m yine kar\u015F\u0131la\u015Ft\u0131k
     ve kafan yine kar\u0131\u015F\u0131k."

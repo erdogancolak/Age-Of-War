@@ -1084,6 +1084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesPrefab:
+  - {fileID: 2228021015058099098, guid: 094671b104b3a824da8f812bf3116fca, type: 3}
   - {fileID: 5633379910191778515, guid: ed31eef45c4c5834696894aa33b24199, type: 3}
   - {fileID: 7233665583641068274, guid: 2bd41a9876df4464b926894ef98c8c0b, type: 3}
   - {fileID: 2111590146235137586, guid: 7b609663f7aebe0468f2e2f3658a198a, type: 3}
