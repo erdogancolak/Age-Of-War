@@ -74,7 +74,9 @@ public class PatronDialogue : MonoBehaviour
     IEnumerator MoveGlobeToPlayer()
     {
         globe.transform.DOMove(player.position, moveSpeed); // Globe objesini player'a doðru hareket ettir
-        yield return new WaitForSeconds(moveSpeed); // Hareket süresi kadar bekle
-        SceneManager.LoadScene(1); // Bir sonraki sahneye geç
+        yield return new WaitForSeconds(moveSpeed); // Hareket süresi kadar bekle      
+
+
+        SceneManager.LoadScene(4); // Bir sonraki sahneye geç
     }
 }

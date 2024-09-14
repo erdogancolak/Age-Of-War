@@ -42,13 +42,43 @@ public class NewEnemySetup : MonoBehaviour
                 Skills.Add("Slime");
                 skillDropdown.AddOptions(Skills);
                 break;
+            case 5:
+                Skills.Clear();
+                Skills.Add("BotWheel");
+                Skills.Add("NightBorne");
+                Skills.Add("Wizard");
+                Skills.Add("Slime");
+                Skills.Add("Demon");
+                skillDropdown.AddOptions(Skills);
+                break;
+            case 6:
+                Skills.Clear();
+                Skills.Add("BotWheel");
+                Skills.Add("NightBorne");
+                Skills.Add("Wizard");
+                Skills.Add("Slime");
+                Skills.Add("Demon");
+                Skills.Add("Necromancer");
+                skillDropdown.AddOptions(Skills);
+                break;
+            case 7:
+                Skills.Clear();
+                Skills.Add("BotWheel");
+                Skills.Add("NightBorne");
+                Skills.Add("Wizard");
+                Skills.Add("Slime");
+                Skills.Add("Demon");
+                Skills.Add("Necromancer");
+                Skills.Add("Patron");
+                skillDropdown.AddOptions(Skills);
+                break;
         }
 
     }
 
     void Update()
     {
-        
+
     }
 
     public void SetEnemy()
@@ -71,6 +101,23 @@ public class NewEnemySetup : MonoBehaviour
                 BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
                 enemyIndex++;
                 break;
+            case 4:
+                BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
+                enemyIndex++;
+                break;
+            case 5:
+                BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
+                enemyIndex++;
+                break;
+            case 6:
+                BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
+                enemyIndex++;
+                break;
+            case 7:
+                BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
+                enemyIndex++;
+                break;
+
         }
         SceneManager.LoadScene(2);
     }

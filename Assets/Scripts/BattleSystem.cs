@@ -23,8 +23,6 @@ public class BattleSystem : MonoBehaviour
     public Text skillButtonText;
     public GameObject skillButton;
 
-    
-
     public static int winIndex;
     Unit playerUnit;
     Unit enemyUnit;
@@ -49,6 +47,18 @@ public class BattleSystem : MonoBehaviour
                 break;
             case 4:
                 skillButtonText.text = "Slime";
+                skillButton.SetActive(true);
+                break;
+            case 5:
+                skillButtonText.text = "Demon";
+                skillButton.SetActive(true);
+                break;
+            case 6:
+                skillButtonText.text = "Necromancer";
+                skillButton.SetActive(true);
+                break;
+            case 7:
+                skillButtonText.text = "Patron";
                 skillButton.SetActive(true);
                 break;
             default:
@@ -97,17 +107,18 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.PLAYERTURN)
         {
-            yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator,enemyUnit, "Attack"));
+            yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Attack"));
             yield return new WaitForSeconds(0.3f);
-            if(enemyUnit.currentHP <= 0)
+            if (enemyUnit.currentHP <= 0)
             {
+                state = BattleState.WON;
                 EndBattle();
             }
             else
             {
                 state = BattleState.ENEMYTURN;
+                StartCoroutine(EnemyTurn());
             }
-            StartCoroutine(EnemyTurn());
         }
     }
 
@@ -115,10 +126,11 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.ENEMYTURN)
         {
-            yield return StartCoroutine(enemyUnit.Attack(playerBattleStation, enemyBattleStation, playerAnimator,playerUnit,"Attack"));
+            yield return StartCoroutine(enemyUnit.Attack(playerBattleStation, enemyBattleStation, playerAnimator, playerUnit, "Attack"));
             yield return new WaitForSeconds(0.3f);
             if (playerUnit.currentHP <= 0)
             {
+                state = BattleState.LOST;
                 EndBattle();
             }
             else
@@ -161,34 +173,42 @@ public class BattleSystem : MonoBehaviour
         {
             case 1:
                 playerUnit.isMove = false;
-                StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "BotWheel"));
-                yield return new WaitForSeconds(1);
+                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "BotWheel"));
                 break;
             case 2:
-                StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "NightBorne"));
-                yield return new WaitForSeconds(1);
+                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "NightBorne"));
                 break;
             case 3:
                 playerUnit.isMove = false;
-                StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Wizard"));
-                yield return new WaitForSeconds(1);
+                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Wizard"));
                 break;
             case 4:
-                StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Slime"));
-                yield return new WaitForSeconds(1);
+                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Slime"));
+                break;
+            case 5:
+                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Demon"));
+                break;
+            case 6:
+                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Necromancer"));
+                break;
+            case 7:
+                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Patron"));
                 break;
             default:
                 break;
         }
+
         yield return new WaitForSeconds(1f);
+
         if (enemyUnit.currentHP <= 0)
         {
+            state = BattleState.WON;
             EndBattle();
         }
         else
         {
             state = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
         }
-        StartCoroutine(EnemyTurn());
     }
 }

@@ -1084,11 +1084,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesPrefab:
-  - {fileID: 2228021015058099098, guid: 094671b104b3a824da8f812bf3116fca, type: 3}
   - {fileID: 5633379910191778515, guid: ed31eef45c4c5834696894aa33b24199, type: 3}
   - {fileID: 7233665583641068274, guid: 2bd41a9876df4464b926894ef98c8c0b, type: 3}
   - {fileID: 2111590146235137586, guid: 7b609663f7aebe0468f2e2f3658a198a, type: 3}
   - {fileID: 8522207764911333476, guid: ef2686ba4e3f4884c8b3d0d3dd90c03a, type: 3}
+  - {fileID: 2228021015058099098, guid: 094671b104b3a824da8f812bf3116fca, type: 3}
+  - {fileID: 8779682168695637868, guid: 33d469884740566408f3bbe7362d0d99, type: 3}
   skillDropdown: {fileID: 664146001}
   Skills:
   - BotWheel
