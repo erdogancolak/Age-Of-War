@@ -2644,6 +2644,10 @@ MonoBehaviour:
   audioclips:
   - {fileID: 8300000, guid: 90eef624bade38a42bf7769fc0c3361b, type: 3}
   - {fileID: 8300000, guid: bc0d846f33dc7a44789dc07fd8343631, type: 3}
+  - {fileID: 8300000, guid: 1ba9a01f9d5774042b83fe8af20aae31, type: 3}
+  - {fileID: 8300000, guid: dd0e71cda3a9ea3499c88af1e9163189, type: 3}
+  - {fileID: 8300000, guid: e56afd9aa93716947b73b4f1df00c0df, type: 3}
+  - {fileID: 8300000, guid: 1ba9a01f9d5774042b83fe8af20aae31, type: 3}
   defaultClip: {fileID: 8300000, guid: e9c1bf948f1586848971bea5dd7c8ca7, type: 3}
 --- !u!4 &725337240
 Transform:

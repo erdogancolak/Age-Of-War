@@ -12,6 +12,7 @@ public class NewEnemySetup : MonoBehaviour
     public TMP_Dropdown skillDropdown;
     public static int choosedSkill;
     public List<string> Skills;
+
     void Start()
     {
         switch (BattleSystem.winIndex)
@@ -73,53 +74,25 @@ public class NewEnemySetup : MonoBehaviour
                 skillDropdown.AddOptions(Skills);
                 break;
         }
-
     }
 
     void Update()
     {
-
     }
 
     public void SetEnemy()
     {
-        switch (enemyIndex)
+        if (enemyIndex < enemiesPrefab.Count)
         {
-            case 0:
-                BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
-                enemyIndex++;
-                break;
-            case 1:
-                BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
-                enemyIndex++;
-                break;
-            case 2:
-                BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
-                enemyIndex++;
-                break;
-            case 3:
-                BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
-                enemyIndex++;
-                break;
-            case 4:
-                BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
-                enemyIndex++;
-                break;
-            case 5:
-                BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
-                enemyIndex++;
-                break;
-            case 6:
-                BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
-                enemyIndex++;
-                break;
-            case 7:
-                BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
-                enemyIndex++;
-                break;
-
+            BattleSystem.enemyPrefab = enemiesPrefab[enemyIndex];
+            enemyIndex++;
+            SceneManager.LoadScene(2);
         }
-        SceneManager.LoadScene(2);
+        else
+        {
+            // Tüm düþmanlar bittiðinde sahne 4'e geç
+            SceneManager.LoadScene(4);
+        }
     }
 
     public void SkillButton()
