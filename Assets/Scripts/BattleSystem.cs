@@ -23,6 +23,10 @@ public class BattleSystem : MonoBehaviour
     public Text skillButtonText;
     public GameObject skillButton;
 
+    public AudioClip[] audioclips;
+    public AudioClip defaultClip;
+    public static AudioClip enemyClip;
+
     public static int winIndex;
     Unit playerUnit;
     Unit enemyUnit;
@@ -31,10 +35,12 @@ public class BattleSystem : MonoBehaviour
 
     private void Start()
     {
+        enemyClip = enemyUnit.GetComponent<AudioSource>().clip;
         switch (NewEnemySetup.choosedSkill)
         {
             case 1:
                 skillButtonText.text = "BotWheel";
+                
                 skillButton.SetActive(true);
                 break;
             case 2:
@@ -107,7 +113,8 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.PLAYERTURN)
         {
-            yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Attack"));
+            state = BattleState.ENEMYTURN;
+            yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Attack", defaultClip));
             yield return new WaitForSeconds(0.3f);
             if (enemyUnit.currentHP <= 0)
             {
@@ -116,7 +123,6 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
-                state = BattleState.ENEMYTURN;
                 StartCoroutine(EnemyTurn());
             }
         }
@@ -126,7 +132,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.ENEMYTURN)
         {
-            yield return StartCoroutine(enemyUnit.Attack(playerBattleStation, enemyBattleStation, playerAnimator, playerUnit, "Attack"));
+            yield return StartCoroutine(enemyUnit.Attack(playerBattleStation, enemyBattleStation, playerAnimator, playerUnit, "Attack", enemyClip));
             yield return new WaitForSeconds(0.3f);
             if (playerUnit.currentHP <= 0)
             {
@@ -145,7 +151,6 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             winIndex++;
-            Debug.Log("You won the battle!");
             SceneManager.LoadScene(3);
         }
         else if (state == BattleState.LOST)
@@ -164,51 +169,54 @@ public class BattleSystem : MonoBehaviour
 
     public void OnSkillButton()
     {
+        if (state != BattleState.PLAYERTURN)
+            return;
         StartCoroutine(skillChoose());
     }
 
     public IEnumerator skillChoose()
     {
-        switch (NewEnemySetup.choosedSkill)
-        {
-            case 1:
-                playerUnit.isMove = false;
-                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "BotWheel"));
-                break;
-            case 2:
-                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "NightBorne"));
-                break;
-            case 3:
-                playerUnit.isMove = false;
-                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Wizard"));
-                break;
-            case 4:
-                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Slime"));
-                break;
-            case 5:
-                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Demon"));
-                break;
-            case 6:
-                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Necromancer"));
-                break;
-            case 7:
-                yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Patron"));
-                break;
-            default:
-                break;
-        }
-
-        yield return new WaitForSeconds(1f);
-
-        if (enemyUnit.currentHP <= 0)
-        {
-            state = BattleState.WON;
-            EndBattle();
-        }
-        else
+        if (state == BattleState.PLAYERTURN)
         {
             state = BattleState.ENEMYTURN;
-            StartCoroutine(EnemyTurn());
+            switch (NewEnemySetup.choosedSkill)
+            {
+                case 1:
+                    playerUnit.isMove = false;
+                    yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "BotWheel", audioclips[NewEnemySetup.choosedSkill - 1]));
+                    break;
+                case 2:
+                    yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "NightBorne", audioclips[NewEnemySetup.choosedSkill - 1]));
+                    break;
+                case 3:
+                    playerUnit.isMove = false;
+                    yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Wizard", audioclips[NewEnemySetup.choosedSkill - 1]));
+                    break;
+                case 4:
+                    yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Slime", audioclips[NewEnemySetup.choosedSkill - 1]));
+                    break;
+                case 5:
+                    yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Demon", audioclips[NewEnemySetup.choosedSkill - 1]));
+                    break;
+                case 6:
+                    yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Necromancer", audioclips[NewEnemySetup.choosedSkill - 1]));
+                    break;
+                case 7:
+                    yield return StartCoroutine(playerUnit.Attack(enemyBattleStation, playerBattleStation, enemyAnimator, enemyUnit, "Patron", audioclips[NewEnemySetup.choosedSkill - 1]));
+                    break;
+                default:
+                    break;
+            }
+            yield return new WaitForSeconds(1f);
         }
+            if (enemyUnit.currentHP <= 0)
+            {
+                state = BattleState.WON;
+                EndBattle();
+            }
+            else
+            {
+                StartCoroutine(EnemyTurn());
+            }
     }
 }

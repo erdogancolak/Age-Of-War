@@ -125,7 +125,6 @@ public class NewEnemySetup : MonoBehaviour
     public void SkillButton()
     {
         choosedSkill = skillDropdown.value;
-        Debug.Log(choosedSkill);
     }
 
     public void SkillAdd()

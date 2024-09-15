@@ -19,6 +19,7 @@ public class Unit : MonoBehaviour
     private Collider2D collider;
 
     Animator animator;
+    AudioSource AttackAudioSource;
 
     public bool isMove;
     public bool isEnemy;
@@ -33,6 +34,7 @@ public class Unit : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         collider = GetComponent<Collider2D>();
+        AttackAudioSource = GetComponent<AudioSource>();
     }
 
     public void TakeDamage(int damage)
@@ -46,7 +48,7 @@ public class Unit : MonoBehaviour
 
     
 
-    public IEnumerator Attack(Transform enemyPos, Transform playerPos, Animator enemyAnimator, Unit enemyUnit, string animTrigger)
+    public IEnumerator Attack(Transform enemyPos, Transform playerPos, Animator enemyAnimator, Unit enemyUnit, string animTrigger, AudioClip clip)
     {
         if (isMove)
         {
@@ -56,8 +58,9 @@ public class Unit : MonoBehaviour
             animator.SetBool("isRun", false);
             yield return new WaitForSeconds(.5f);
         }
-
         animator.SetTrigger(animTrigger);
+        AttackAudioSource.clip = clip;
+        AttackAudioSource.Play();
         enemyAnimator.SetTrigger("Hit");
         yield return new WaitForSeconds(.5f);
         enemyUnit.TakeDamage(damage);
